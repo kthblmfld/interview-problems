@@ -1,8 +1,10 @@
+package dnahealthmax;
+
 import java.util.Scanner;
 
 // https://www.hackerrank.com/challenges/determining-dna-health/problem
 // TODO: Use a trie and the Aho-Corasick algorithm to complete the problem
-public class DnaHealthMax {
+public class Solution {
 
     private static final Scanner scanner = new Scanner(System.in);
 

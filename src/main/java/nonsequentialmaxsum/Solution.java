@@ -1,10 +1,10 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+package nonsequentialmaxsum;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 //https://www.hackerrank.com/challenges/max-array-sum
-public class NonSequentialMaxSum {
+public class Solution {
 
     // Complete the maxSubsetSum function below.
     static int maxSubsetSum(int[] in) {

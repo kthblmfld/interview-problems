@@ -1,8 +1,9 @@
+package primefinder;
+
 import java.io.*;
-import java.util.List;
 import java.util.Scanner;
 
-public class PrimeFinder {
+public class Solution {
 
     static int[] getPrimes(){
         return new int[]{2,3,5,7,11,13,17,19,23,
@@ -63,21 +64,15 @@ public class PrimeFinder {
         return result;
     }
 
-    //    DELETE DELETE DELETE
-
     private static Scanner scanner;
-
-    static {
-        Class clazz = PrimeFinder.class;
-        scanner = new Scanner(clazz.getResourceAsStream("input-primefinder.txt"));
-
-    }
-//    DELETE DELETE DELETE
 
     //private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String sourceFilePath = "/input-primefinder.txt";
+        scanner = new Scanner(Solution.class.getResourceAsStream(sourceFilePath));
 
         int p = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");

@@ -1,0 +1,3 @@
+// In main
+String sourceFilePath = "/input-primefinder.txt";
+scanner = new Scanner(Solution.class.getResourceAsStream(sourceFilePath));
