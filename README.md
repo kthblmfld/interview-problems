@@ -16,7 +16,8 @@ What is the technology stack?
 
 Who is the candidate?
 
-Is the candidate coming from a 3rd party? That's a red flag. as we get some imposters. Missing the spark of passion.
+Is the candidate coming from a 3rd party? That's a red flag as we get some imposters. 
+Missing the spark of passion? Important for complex/collaborative engagements.
 
 
 
