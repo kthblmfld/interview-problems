@@ -1,58 +1,93 @@
 package friendcirclequeries;
 
 import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.*;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 
-public class Solution {
+class Result {
 
-    static List<Set> circles = new ArrayList<>();
+    /*
+     * Complete the 'countGroups' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts STRING_ARRAY related as parameter.
+     */
 
-    // Complete the maxCircle function below.
-    static int[] maxCircle(int[][] queries) {
+    public static int countGroups(List<String> related) {
 
-        return new int[]{};
+        int dimension = related.size();
+        int[][] matrix = new int[dimension][dimension];
+
+        int currentRow = 0;
+        for (String row : related) {
+            for (int i = 0; i < row.length(); i++) {
+                int cellVal = Integer.parseInt(String.valueOf(row.charAt(i)));
+                matrix[currentRow][i] = cellVal;
+            }
+            currentRow += 1;
+        }
+
+        List<Set<Integer>> groups = new ArrayList<>();
+
+        for (int i = 0; i < dimension; i++) {
+            Set<Integer> localGroup = new HashSet();
+            for (int j = 0; j < dimension; j++) {
+                if (matrix[i][j] == 1) {
+                    localGroup.add(j + 1);
+                }
+            }
+
+            mergeGroups(groups, localGroup);
+        }
+
+        return groups.size();
     }
 
-    private static final Scanner scanner = new Scanner(System.in);
+    static void mergeGroups(List<Set<Integer>> allGroups, Set<Integer> newGroup) {
+        boolean found = false;
+        for (Set<Integer> knownGroup : allGroups) {
+            for (int member : newGroup) {
+                if (knownGroup.contains(member)) {
+                    found = true;
+                    knownGroup.addAll(newGroup);
+                    break;
+                }
+            }
+        }
+        if (!found) {
+            allGroups.add(newGroup);
+        }
+    }
+}
 
+public class Solution {
     public static void main(String[] args) throws IOException {
+
+        String sourceFilePath = "/input-connectedgroups.txt";
+        InputStream inputStream = Solution.class.getResourceAsStream(sourceFilePath);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-        int q = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        int relatedCount = Integer.parseInt(bufferedReader.readLine().trim());
 
-        int[][] queries = new int[q][2];
-
-        for (int i = 0; i < q; i++) {
-            String[] queriesRowItems = scanner.nextLine().split(" ");
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-            for (int j = 0; j < 2; j++) {
-                int queriesItem = Integer.parseInt(queriesRowItems[j]);
-                queries[i][j] = queriesItem;
+        List<String> related = IntStream.range(0, relatedCount).mapToObj(i -> {
+            try {
+                return bufferedReader.readLine();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
-        }
+        })
+                .collect(toList());
 
-        int[] ans = maxCircle(queries);
+        int result = Result.countGroups(related);
 
-        for (int i = 0; i < ans.length; i++) {
-            bufferedWriter.write(String.valueOf(ans[i]));
-
-            if (i != ans.length - 1) {
-                bufferedWriter.write("\n");
-            }
-        }
-
+        bufferedWriter.write(String.valueOf(result));
         bufferedWriter.newLine();
 
+        bufferedReader.close();
         bufferedWriter.close();
-
-        scanner.close();
     }
 }

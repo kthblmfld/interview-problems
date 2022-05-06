@@ -7,3 +7,16 @@ Having them here allows me to revert historical changes and dig deep. Even thoug
 Also, having them here makes it easier to organize problems solved vs. problems in progress ( x out of n tests currently passing ). 
 
 The problem classes are modified when necessary to print their results to System.out. 
+
+# For interviewing
+
+What is the job description?
+
+What is the technology stack?
+
+Who is the candidate?
+
+Is the candidate coming from a 3rd party? That's a red flag. as we get some imposters. Missing the spark of passion.
+
+
+
